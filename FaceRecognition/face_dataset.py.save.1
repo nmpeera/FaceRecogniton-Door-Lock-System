@@ -1,0 +1,43 @@
+import cv2
+from picamera.array import PiRGBArray
+from picamera import PiCamera
+import numpy as np
+import os
+import sys
+
+camera = PiCamera()
+camera.resolution = (640,480) #setting the resolution
+camera.framerate = 30 #setting the framerate
+rawCapture = PiRGBArray(camera, size=(640,480))
+
+faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+
+#entering the name of the user
+name = input("Please enter User ID: ")
+ar n = input("Please entyer the name: ") Initialize individual sampling face count
+count = 1
+
+for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+	if count > 30:
+		break
+	frame = frame.array
+	frame = cv2.flip(frame, -1) #flipping the frame vertically
+	frame = cv2.flip(frame, 1) #flipping the frame horizontally
+	gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+	face = faceCascade.detectMultiScale(gray, scaleFactor = 1.5, minNeighbors = 5)
+	for (x,y,w,h) in face:
+		cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 255, 0), 2)
+		backGround = gray[y:y+h, x:x+w]
+		file = "./Dataset/"+str(n)+"." +str(name) +'.' + str(count) + ".jpg"
+		cv2.imwrite(file,backGround)
+		cv2.imshow("Face",backGround)
+		count += 1
+
+	cv2.imshow('frame', frame)
+	key = cv2.waitKey(100) & 0xff
+	rawCapture.truncate(0)
+
+	if key == 27:
+		break
+
+cv2.destroyAllWindows()

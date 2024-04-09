@@ -1,0 +1,44 @@
+<!doctype html>
+<head><title>Face Recognition App</title>
+	<meta charset=uft-8>
+	<style>
+	.button {
+		border: 4px solid Black;
+		color: white;
+		padding: 15px 20px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px ;
+		margin: 4px 2px;
+		cursor: pointer;
+	}
+	.button1 { background-color: #4CAF50;
+			color: Black;}
+	.button1:hover {
+		background-color: #4CAF50;
+		color:White;}
+	.button2 {  color: Yellow;
+			background-color: Red;}
+	.button3 { background-color: Grey;
+			color: Red;}
+	</style>
+	</head>
+	<body>
+		<h1>Peera & Sokar Co.</h1>
+		<form action="/face_recognition/">
+			<input type="Submit" value="To Recognize Click Below" />
+		</form>
+		<button class = "button button1"><a href="/face_recognition/">Recognizer</a></button>
+		
+		<form action="/DataSet/">
+			<input type="Submit" value="To Add Face Click Below" />
+		</form>
+		<button class = "button button2"><a href="/DataSet/">Add Face</a></button>
+		
+		<form action="/Delete/">
+			<input type="Submit" value="To Remove Face Click Below" />
+		</form>
+		<button class = "button button3"><a href="/Delete/">Remove</a></button>
+			
+	</body>
